@@ -1,25 +1,51 @@
-package com.capgemini;
 
-@FunctionalInterface
-interface MathFunction{
-	int calculate(int a,int b);
-	
-	static void printResult(int a,int b,String function,MathFunction fobj) {
-		System.out.println("Result of "+function+" is "+fobj.calculate(a,b));
+package com.capgemini;
+import java.util.*;
+import java.util.function.Consumer;
+
+class MyConsumer implements Consumer<Integer>{
+	public void accept(Integer t) {
+		System.out.println("Method2 value :: "+t);
 	}
 }
-
 public class mathOperationApp {
+    
    public static void main(String[] args) {
-	   MathFunction add=(x,y)->x+y;
-	   MathFunction subtract=(x,y)->x-y;
-	   MathFunction division=(x,y)->x/y;
-	   int a,b;
-	   a=30;
-	   b=10;
-	   MathFunction.printResult(a, b,"Addition", add);
-	   MathFunction.printResult(a, b,"Subtraction", subtract);
-	   MathFunction.printResult(a, b,"Division", division);
-	   
+	  
+	  ArrayList<Integer> numbers= new ArrayList<Integer>(Arrays.asList(23,28,98,47,23,12,24));
+	  
+	  //method 1...
+	  Iterator<Integer> it=numbers.iterator();
+	  while(it.hasNext()) {
+		  Integer i=it.next();
+		  System.out.println("Iterator value :: "+i);
+	  }
+	  
+	  //method 2...
+	  MyConsumer myconsumer=new MyConsumer();
+	  numbers.forEach(myconsumer);
+	  
+	  
+	  //method 3..
+	  numbers.forEach(new Consumer<Integer>() {
+		  public void accept(Integer t) {
+			  System.out.println("Method 3 for anonymous class : "+t);
+		  }
+	  });
+	  
+	  //method 4..(explicit lambda)
+	  Consumer<Integer> myListAction=n->{
+		  System.out.println("Method 4 : "+n);
+	  };
+	  numbers.forEach(myListAction);
+	  
+	  //method 5..(implicit lambda)
+	  numbers.forEach(n->{
+		  System.out.println("Method 5: for each numbers "+n);
+	  });
+	  
+	  
+	 
+	  
    }
 }
