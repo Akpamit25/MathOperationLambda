@@ -11,10 +11,12 @@ public class mathOperationApp {
 	   MathFunction subtract=(x,y)->x-y;
 	   MathFunction division=(x,y)->x/y;
 	   int a,b;
-	   a=20;
+	   a=25;
 	   b=10;
 	   System.out.println("Addition is : "+add.calculate(a, b));
 	   System.out.println("Subtraction is : "+subtract.calculate(a, b));
 	   System.out.println("Division is : "+division.calculate(a, b));
    }
 }
+
+
